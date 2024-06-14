@@ -42,16 +42,40 @@ const handleSubmit = event => {
       }
     })
     .then(createdProduct => {
-      if (id) {
+      /*  if (id) {
         alert(`Product: ${createdProduct.name} has been modified. Product ID: ${createdProduct._id}`);
       } else {
         alert(`Product: ${createdProduct.name} has been created. Product ID: ${createdProduct._id}`);
       }
-      form.reset();
+      form.reset(); */
     })
     .catch(error => console.log(error));
 
   /* chiusura dell'handle submission */
+};
+
+const deleteProduct = () => {
+  const hasConfirmed = confirm("do you want to delete?");
+  if (hasConfirmed) {
+    fetch(URL, {
+      method: "DELETE",
+      headers: {
+        Authorization: auth
+      }
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error("Couldn't delete the item");
+        }
+      })
+      .then(deletedProduct => {
+        alert("You succesfully deleted the item " + deletedProduct.name);
+        window.location.assign("/");
+      })
+      .catch(error => console.log(error));
+  }
 };
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -96,6 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn btn-danger px-3";
     deleteBtn.innerText = "Delete";
+    deleteBtn.onclick = deleteProduct;
     btnContainer.appendChild(deleteBtn);
 
     /* chiusura IF */
