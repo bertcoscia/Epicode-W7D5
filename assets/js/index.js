@@ -64,9 +64,10 @@ const fetchProducts = () => {
           cardPrice.innerText = `$${product.price}`;
 
           // creo il button modifica
-          const modifyBtn = document.createElement("button");
+          const modifyBtn = document.createElement("a");
           modifyBtn.className = "btn btn-primary";
           modifyBtn.innerText = "Modify";
+          modifyBtn.setAttribute("href", `./backoffice.html?productId=${product._id}`);
 
           cardImgAnchor.appendChild(cardImg);
           cardBody.append(cardTitle, cardSubTitle, cardText, cardPrice, modifyBtn);
@@ -81,6 +82,10 @@ const fetchProducts = () => {
 
 const redirectCardImg = product => {
   window.location.assign(`./details.html/?productId=${product._id}`);
+};
+
+const redirectModifyBtn = product => {
+  window.location.assign(`./backoffice.html/?productId=${product._id}`);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
