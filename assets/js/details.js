@@ -24,6 +24,7 @@ const fetchRequestedProduct = () => {
       console.log("requested product", product);
 
       // DOM MANIPULATION
+
       // creo il div .col che contiene l'immagine
       const colImg = document.createElement("div");
       colImg.className = "col-md-4";
