@@ -78,7 +78,7 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("productImg").value = imageUrl;
         document.getElementById("price").value = price;
       })
-      .catch(erro);
+      .catch(error => console.log(error));
   }
 
   /* chiusura window.addEventListener */
