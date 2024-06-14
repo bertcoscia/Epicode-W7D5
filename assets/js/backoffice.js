@@ -137,9 +137,9 @@ window.addEventListener("DOMContentLoaded", () => {
     resetBtn.innerText = "Reset";
     resetBtn.setAttribute("id", "resetBtn");
     resetBtn.setAttribute("type", "button");
-    resetBtn.addEventListener("click", () => {
-      form.reset();
-    });
+    resetBtn.setAttribute("data-bs-toggle", "modal");
+    resetBtn.setAttribute("data-bs-target", "#editModal");
+    resetBtn.addEventListener("click", () => {});
     btnContainer.appendChild(resetBtn);
 
     // creo il bottone salva
