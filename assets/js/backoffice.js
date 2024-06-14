@@ -135,6 +135,16 @@ window.addEventListener("DOMContentLoaded", () => {
     saveBtn.innerText = "Save";
     saveBtn.setAttribute("id", "saveBtn");
     btnContainer.appendChild(saveBtn);
+
+    // creo il bottone reset
+    const resetBtn = document.createElement("button");
+    resetBtn.className = "btn btn-primary px-3";
+    resetBtn.innerText = "Reset";
+    resetBtn.setAttribute("id", "resetBtn");
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+    });
+    btnContainer.appendChild(resetBtn);
   }
 
   /* chiusura window.addEventListener */
