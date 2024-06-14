@@ -42,12 +42,12 @@ const handleSubmit = event => {
       }
     })
     .then(createdProduct => {
-      /*  if (id) {
-        alert(`Product: ${createdProduct.name} has been modified. Product ID: ${createdProduct._id}`);
+      if (id) {
+        alert(`Product: ${createdProduct.name} has been modified.`);
       } else {
-        alert(`Product: ${createdProduct.name} has been created. Product ID: ${createdProduct._id}`);
+        alert(`Product: ${createdProduct.name} has been created.`);
       }
-      form.reset(); */
+      form.reset();
     })
     .catch(error => console.log(error));
 
@@ -114,6 +114,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const modifyBtn = document.createElement("button");
     modifyBtn.className = "btn btn-primary px-3";
     modifyBtn.innerText = "Modify";
+    modifyBtn.setAttribute("id", "modifyBtn");
     btnContainer.appendChild(modifyBtn);
 
     // creo il bottone delete
@@ -121,6 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
     deleteBtn.className = "btn btn-danger px-3";
     deleteBtn.innerText = "Delete";
     deleteBtn.onclick = deleteProduct;
+    deleteBtn.setAttribute("id", "deleteBtn");
     btnContainer.appendChild(deleteBtn);
 
     /* chiusura IF */
@@ -131,6 +133,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const saveBtn = document.createElement("button");
     saveBtn.className = "btn btn-primary px-3";
     saveBtn.innerText = "Save";
+    saveBtn.setAttribute("id", "saveBtn");
     btnContainer.appendChild(saveBtn);
   }
 

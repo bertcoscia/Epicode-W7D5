@@ -36,31 +36,41 @@ const fetchProducts = () => {
           // genero il linkImg per i dettagli
           const cardImgAnchor = document.createElement("a");
           cardImgAnchor.setAttribute("href", `./details.html?productId=${product._id}`);
+          cardImgAnchor.className = "border-bottom border-light-subtle";
 
           // creo la top image cap
           const cardImg = document.createElement("img");
           cardImg.src = product.imageUrl;
           cardImg.style.width = "100%";
+          cardImg.style.height = "300px";
+          cardImg.style.objectFit = "contain";
 
           // creo il card body
           const cardBody = document.createElement("div");
           cardBody.className = "card-body";
 
           // creo il card title
-          const cardTitle = document.createElement("h5");
+          const cardTitle = document.createElement("a");
           cardTitle.innerText = product.name;
+          cardTitle.setAttribute("href", `./details.html?productId=${product._id}`);
+          cardTitle.className = "text-decoration-none link-dark h5";
 
           // creo il card subtitle
           const cardSubTitle = document.createElement("h6");
           cardSubTitle.innerText = product.brand;
+          cardSubTitle.className = "text-secondary mt-2";
 
           // creo il card text
           const cardText = document.createElement("div");
-          cardText.className = "card-text";
+          cardText.className = "card-text mb-2";
           cardText.innerText = product.description;
 
+          // creo il card footer
+          const cardFooter = document.createElement("div");
+          cardFooter.className = "d-flex justify-content-between align-items-center";
+
           // creo il prezzo
-          const cardPrice = document.createElement("small");
+          const cardPrice = document.createElement("h6");
           cardPrice.innerText = `$${product.price}`;
 
           // creo il button modifica
@@ -70,7 +80,8 @@ const fetchProducts = () => {
           modifyBtn.setAttribute("href", `./backoffice.html?productId=${product._id}`);
 
           cardImgAnchor.appendChild(cardImg);
-          cardBody.append(cardTitle, cardSubTitle, cardText, cardPrice, modifyBtn);
+          cardFooter.append(modifyBtn, cardPrice);
+          cardBody.append(cardTitle, cardSubTitle, cardText, cardFooter);
           card.append(cardImgAnchor, cardBody);
           col.appendChild(card);
           row.appendChild(col);
