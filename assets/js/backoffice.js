@@ -138,8 +138,12 @@ window.addEventListener("DOMContentLoaded", () => {
     resetBtn.setAttribute("id", "resetBtn");
     resetBtn.setAttribute("type", "button");
     resetBtn.setAttribute("data-bs-toggle", "modal");
-    resetBtn.setAttribute("data-bs-target", "#editModal");
-    resetBtn.addEventListener("click", () => {});
+    resetBtn.setAttribute("data-bs-target", "#resetModal");
+    const resetBtnModal = document.getElementById("resetBtnModal");
+    resetBtnModal.setAttribute("data-bs-dismiss", "modal"); // chiudo il modale al click del bottone reset
+    resetBtnModal.onclick = () => {
+      form.reset();
+    };
     btnContainer.appendChild(resetBtn);
 
     // creo il bottone salva
