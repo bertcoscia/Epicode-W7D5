@@ -27,7 +27,7 @@ const fetchRequestedProduct = () => {
 
       // creo il div .col che contiene l'immagine
       const colImg = document.createElement("div");
-      colImg.className = "col-md-4";
+      colImg.className = "col-md-4 px-3";
 
       // creo img del prodotto
       const productImg = document.createElement("img");
@@ -40,11 +40,11 @@ const fetchRequestedProduct = () => {
 
       // creo il titlo
       const title = document.createElement("h2");
-      title.className = "mb-3";
+      title.className = " pb-3 border-bottom border-secondary";
       title.innerText = product.name;
 
       //creo il sub title
-      const subTitle = document.createElement("small");
+      const subTitle = document.createElement("h5");
       subTitle.innerText = product.brand;
 
       // creo il testo della descrizione

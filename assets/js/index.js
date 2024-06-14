@@ -31,7 +31,7 @@ const fetchProducts = () => {
 
           // creo il div .card
           const card = document.createElement("div");
-          card.className = "card mb-4";
+          card.className = "card mb-4 shadow";
 
           // genero il linkImg per i dettagli
           const cardImgAnchor = document.createElement("a");
