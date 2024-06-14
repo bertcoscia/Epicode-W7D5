@@ -9,11 +9,6 @@ const method = id ? "PUT" : "POST";
 
 const auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjk5NzdjMjM5YzAwMTUyZjRiM2MiLCJpYXQiOjE3MTgzNTIyNzksImV4cCI6MTcxOTU2MTg3OX0.iqJ9iKifEmv4QneeBjeH2alL6rTwRy3dLqfFcopl1co ";
 
-window.addEventListener("DOMContentLoaded", () => {
-  const form = document.querySelector("form");
-  form.onsubmit = handleSubmit;
-});
-
 const handleSubmit = event => {
   event.preventDefault();
 
@@ -54,3 +49,37 @@ const handleSubmit = event => {
 
   /* chiusura dell'handle submission */
 };
+
+window.addEventListener("DOMContentLoaded", () => {
+  console.log(id);
+  const form = document.querySelector("form");
+  form.addEventListener("submit", event => {
+    handleSubmit(event);
+  });
+
+  // se id esiste, popolo i campi del form con i dati del prodotto
+  if (id) {
+    fetch(URL, {
+      headers: {
+        Authorization: auth
+      }
+    })
+      .then(response => response.json())
+      .then(selectedProduct => {
+        console.log(selectedProduct);
+
+        // destrutturo l'oggetto
+        const { name, description, brand, imageUrl, price } = selectedProduct;
+
+        // metto i valori dell'oggetto dentro i campi del form
+        document.getElementById("name").value = name;
+        document.getElementById("description").value = description;
+        document.getElementById("brand").value = brand;
+        document.getElementById("productImg").value = imageUrl;
+        document.getElementById("price").value = price;
+      })
+      .catch(erro);
+  }
+
+  /* chiusura window.addEventListener */
+});
