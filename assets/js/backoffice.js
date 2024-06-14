@@ -43,9 +43,10 @@ const handleSubmit = event => {
     })
     .then(createdProduct => {
       if (id) {
-        alert(`Product: ${createdProduct.name} has been modified.`);
+        alert(`Product: ${createdProduct.name} successfully edited.`);
+        window.location.assign("./backoffice.html");
       } else {
-        alert(`Product: ${createdProduct.name} has been created.`);
+        alert(`Product: ${createdProduct.name} sucessfully created.`);
       }
       form.reset();
     })
@@ -88,7 +89,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // se id esiste, popolo i campi del form con i dati del prodotto
   if (id) {
-    pageHead.innerText = "Modify product";
+    pageHead.innerText = "Edit product";
     fetch(URL, {
       headers: {
         Authorization: auth
@@ -110,24 +111,36 @@ window.addEventListener("DOMContentLoaded", () => {
       })
       .catch(error => console.log(error));
 
-    // creo il bottone modify
-    const modifyBtn = document.createElement("button");
-    modifyBtn.className = "btn btn-primary px-3";
-    modifyBtn.innerText = "Modify";
-    modifyBtn.setAttribute("id", "modifyBtn");
-    btnContainer.appendChild(modifyBtn);
-
     // creo il bottone delete
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn btn-danger px-3";
     deleteBtn.innerText = "Delete";
     deleteBtn.onclick = deleteProduct;
     deleteBtn.setAttribute("id", "deleteBtn");
+    deleteBtn.setAttribute("type", "button");
     btnContainer.appendChild(deleteBtn);
+
+    // creo il bottone modify
+    const modifyBtn = document.createElement("button");
+    modifyBtn.className = "btn btn-primary px-3";
+    modifyBtn.innerText = "Edit";
+    modifyBtn.setAttribute("id", "modifyBtn");
+    btnContainer.appendChild(modifyBtn);
 
     /* chiusura IF */
   } else {
     pageHead.innerText = "Create product";
+
+    // creo il bottone reset
+    const resetBtn = document.createElement("button");
+    resetBtn.className = "btn btn-warning px-3";
+    resetBtn.innerText = "Reset";
+    resetBtn.setAttribute("id", "resetBtn");
+    resetBtn.setAttribute("type", "button");
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+    });
+    btnContainer.appendChild(resetBtn);
 
     // creo il bottone salva
     const saveBtn = document.createElement("button");
@@ -135,16 +148,6 @@ window.addEventListener("DOMContentLoaded", () => {
     saveBtn.innerText = "Save";
     saveBtn.setAttribute("id", "saveBtn");
     btnContainer.appendChild(saveBtn);
-
-    // creo il bottone reset
-    const resetBtn = document.createElement("button");
-    resetBtn.className = "btn btn-primary px-3";
-    resetBtn.innerText = "Reset";
-    resetBtn.setAttribute("id", "resetBtn");
-    resetBtn.addEventListener("click", () => {
-      form.reset();
-    });
-    btnContainer.appendChild(resetBtn);
   }
 
   /* chiusura window.addEventListener */

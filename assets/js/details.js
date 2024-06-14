@@ -40,12 +40,13 @@ const fetchRequestedProduct = () => {
 
       // creo il titlo
       const title = document.createElement("h2");
-      title.className = " pb-3 border-bottom border-secondary";
+      title.className = " pb-3";
       title.innerText = product.name;
 
       //creo il sub title
       const subTitle = document.createElement("h5");
       subTitle.innerText = product.brand;
+      subTitle.className = "border-bottom border-secondary pb-3";
 
       // creo il testo della descrizione
       const descriptionText = document.createElement("p");
@@ -54,6 +55,8 @@ const fetchRequestedProduct = () => {
       // creo il prezzo
       const price = document.createElement("h5");
       price.innerText = `$${product.price}`;
+      price.className = "border border-secondary-subtle rounded-pill text-center bg-warning";
+      price.style.width = "100px";
 
       colText.append(title, subTitle, descriptionText, price);
       colImg.appendChild(productImg);

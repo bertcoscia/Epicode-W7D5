@@ -31,7 +31,7 @@ const fetchProducts = () => {
 
           // creo il div .card
           const card = document.createElement("div");
-          card.className = "card mb-4 shadow";
+          card.className = "card mb-4 shadow h-100";
 
           // genero il linkImg per i dettagli
           const cardImgAnchor = document.createElement("a");
@@ -47,7 +47,7 @@ const fetchProducts = () => {
 
           // creo il card body
           const cardBody = document.createElement("div");
-          cardBody.className = "card-body";
+          cardBody.className = "card-body d-flex flex-column";
 
           // creo il card title
           const cardTitle = document.createElement("a");
@@ -62,21 +62,22 @@ const fetchProducts = () => {
 
           // creo il card text
           const cardText = document.createElement("div");
-          cardText.className = "card-text mb-2";
+          cardText.className = "card-text mb-2 line-clamp";
           cardText.innerText = product.description;
 
           // creo il card footer
           const cardFooter = document.createElement("div");
-          cardFooter.className = "d-flex justify-content-between align-items-center";
+          cardFooter.className = "d-flex justify-content-between align-items-center mt-auto";
 
           // creo il prezzo
           const cardPrice = document.createElement("h6");
           cardPrice.innerText = `$${product.price}`;
+          cardPrice.className = "border border-secondary-subtle rounded-pill text-center bg-warning px-2 py-1";
 
           // creo il button modifica
           const modifyBtn = document.createElement("a");
           modifyBtn.className = "btn btn-primary";
-          modifyBtn.innerText = "Modify";
+          modifyBtn.innerText = "Edit";
           modifyBtn.setAttribute("href", `./backoffice.html?productId=${product._id}`);
 
           cardImgAnchor.appendChild(cardImg);
