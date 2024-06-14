@@ -148,9 +148,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // creo il bottone salva
     const saveBtn = document.createElement("button");
-    saveBtn.className = "btn btn-primary px-3";
+    saveBtn.className = "btn btn-success px-3";
     saveBtn.innerText = "Save";
     saveBtn.setAttribute("id", "saveBtn");
+    saveBtn.setAttribute("type", "button");
+    saveBtn.setAttribute("data-bs-toggle", "modal");
+    saveBtn.setAttribute("data-bs-target", "#saveModal");
+    const saveBtnModal = document.getElementById("saveBtnModal");
+    saveBtnModal.setAttribute("data-bs-dismiss", "modal"); // chiudo il modale al click del bottone save
+    saveBtnModal.onclick = () => {
+      form.requestSubmit(); // -> avvia il submit del form
+    };
     btnContainer.appendChild(saveBtn);
   }
 

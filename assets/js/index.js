@@ -72,11 +72,11 @@ const fetchProducts = () => {
           // creo il prezzo
           const cardPrice = document.createElement("h6");
           cardPrice.innerText = `$${product.price}`;
-          cardPrice.className = "border border-secondary-subtle rounded-pill text-center bg-warning px-2 py-1";
+          cardPrice.className = "border border-secondary-subtle rounded-pill text-center bg-warning px-3 py-1";
 
           // creo il button modifica
           const modifyBtn = document.createElement("a");
-          modifyBtn.className = "btn btn-primary";
+          modifyBtn.className = "btn btn-primary px-4";
           modifyBtn.innerText = "Edit";
           modifyBtn.setAttribute("href", `./backoffice.html?productId=${product._id}`);
 
