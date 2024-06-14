@@ -24,6 +24,7 @@ const handleSubmit = event => {
 
   fetch(URL, {
     method,
+    // metto l'oggetto creato nel body del fetch
     body: JSON.stringify(newProduct),
     headers: {
       "Content-Type": "application/json",
@@ -53,12 +54,14 @@ const handleSubmit = event => {
 window.addEventListener("DOMContentLoaded", () => {
   console.log(id);
   const form = document.querySelector("form");
-  form.addEventListener("submit", event => {
-    handleSubmit(event);
-  });
+  form.onsubmit = handleSubmit;
+
+  const pageHead = document.getElementById("pageHead");
+  const btnContainer = document.getElementById("btnContainer");
 
   // se id esiste, popolo i campi del form con i dati del prodotto
   if (id) {
+    pageHead.innerText = "Modify product";
     fetch(URL, {
       headers: {
         Authorization: auth
@@ -79,6 +82,28 @@ window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("price").value = price;
       })
       .catch(error => console.log(error));
+
+    // creo il bottone modify
+    const modifyBtn = document.createElement("button");
+    modifyBtn.className = "btn btn-primary px-3";
+    modifyBtn.innerText = "Modify";
+    btnContainer.appendChild(modifyBtn);
+
+    // creo il bottone delete
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "btn btn-danger px-3";
+    deleteBtn.innerText = "Delete";
+    btnContainer.appendChild(deleteBtn);
+
+    /* chiusura IF */
+  } else {
+    pageHead.innerText = "Create product";
+
+    // creo il bottone salva
+    const saveBtn = document.createElement("button");
+    saveBtn.className = "btn btn-primary px-3";
+    saveBtn.innerText = "Save";
+    btnContainer.appendChild(saveBtn);
   }
 
   /* chiusura window.addEventListener */
