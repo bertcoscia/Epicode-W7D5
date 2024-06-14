@@ -12,6 +12,9 @@ const auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjk5Nz
 const handleSubmit = event => {
   event.preventDefault();
 
+  // creo riferimento al form
+  const form = event.target;
+
   // creo un oggetto con i valori inseriti nel form
   const newProduct = {
     name: document.getElementById("name").value,
@@ -43,8 +46,8 @@ const handleSubmit = event => {
         alert(`Product: ${createdProduct.name} has been modified. Product ID: ${createdProduct._id}`);
       } else {
         alert(`Product: ${createdProduct.name} has been created. Product ID: ${createdProduct._id}`);
-        form.reset();
       }
+      form.reset();
     })
     .catch(error => console.log(error));
 
