@@ -36,6 +36,10 @@ const fetchProducts = () => {
           // creo la top image cap
           const cardImg = document.createElement("img");
           cardImg.src = product.imageUrl;
+          cardImg.style.cursor = "pointer";
+          cardImg.addEventListener("click", () => {
+            redirectCardImg(product);
+          });
 
           // creo il card body
           const cardBody = document.createElement("div");
@@ -71,6 +75,10 @@ const fetchProducts = () => {
       }
     })
     .catch(error => console.log(error));
+};
+
+const redirectCardImg = product => {
+  window.location.assign(`./details.html/?productId=${product._id}`);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
