@@ -33,13 +33,14 @@ const fetchProducts = () => {
           const card = document.createElement("div");
           card.className = "card mb-4";
 
+          // genero il linkImg per i dettagli
+          const cardImgAnchor = document.createElement("a");
+          cardImgAnchor.setAttribute("href", `./details.html?productId=${product._id}`);
+
           // creo la top image cap
           const cardImg = document.createElement("img");
           cardImg.src = product.imageUrl;
-          cardImg.style.cursor = "pointer";
-          cardImg.addEventListener("click", () => {
-            redirectCardImg(product);
-          });
+          cardImg.style.width = "100%";
 
           // creo il card body
           const cardBody = document.createElement("div");
@@ -67,8 +68,9 @@ const fetchProducts = () => {
           modifyBtn.className = "btn btn-primary";
           modifyBtn.innerText = "Modify";
 
+          cardImgAnchor.appendChild(cardImg);
           cardBody.append(cardTitle, cardSubTitle, cardText, cardPrice, modifyBtn);
-          card.append(cardImg, cardBody);
+          card.append(cardImgAnchor, cardBody);
           col.appendChild(card);
           row.appendChild(col);
         });
