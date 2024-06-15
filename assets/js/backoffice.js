@@ -9,6 +9,8 @@ const method = id ? "PUT" : "POST";
 
 const auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjk5NzdjMjM5YzAwMTUyZjRiM2MiLCJpYXQiOjE3MTgzNTIyNzksImV4cCI6MTcxOTU2MTg3OX0.iqJ9iKifEmv4QneeBjeH2alL6rTwRy3dLqfFcopl1co ";
 
+const autoRedirect = () => {};
+
 const handleSubmit = event => {
   event.preventDefault();
 
@@ -54,11 +56,16 @@ const handleSubmit = event => {
       } else {
         const successCreateAlert = document.getElementById("successCreateAlert");
         successCreateAlert.classList.remove("d-none");
-        const successCreateAlertBtn = document.getElementById("successCreateAlertBtn");
-        successCreateAlertBtn.onclick = () => {
-          form.reset();
-          location.reload();
-        };
+        let seconds = 4;
+        const successCreateAlertTimer = document.querySelector("#successCreateAlertTimer span");
+        setInterval(() => {
+          successCreateAlertTimer.innerText = seconds;
+          seconds--;
+          if (seconds < 0) {
+            form.reset();
+            location.reload();
+          }
+        }, 1000);
       }
     })
     .catch(error => console.log(error));
