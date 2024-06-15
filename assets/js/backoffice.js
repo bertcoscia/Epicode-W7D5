@@ -52,9 +52,14 @@ const handleSubmit = event => {
         alert(`Product: ${createdProduct.name} successfully edited.`);
         window.location.assign("./backoffice.html");
       } else {
-        alert(`Product: ${createdProduct.name} sucessfully created.`);
+        const successCreateAlert = document.getElementById("successCreateAlert");
+        successCreateAlert.classList.remove("d-none");
+        const successCreateAlertBtn = document.getElementById("successCreateAlertBtn");
+        successCreateAlertBtn.onclick = () => {
+          form.reset();
+          location.reload();
+        };
       }
-      form.reset();
     })
     .catch(error => console.log(error));
 
