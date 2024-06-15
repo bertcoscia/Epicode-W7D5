@@ -25,6 +25,13 @@ const handleSubmit = event => {
   };
   console.log(newProduct);
 
+  // Validazione dei campi obbligatori
+  const missingFields = Object.entries(newProduct).filter(([key, value]) => !value);
+  if (missingFields.length > 0) {
+    alert("Please fill in all required fields: " + missingFields.map(([key]) => key).join(", "));
+    return; // Interrompe l'esecuzione se ci sono campi mancanti
+  }
+
   fetch(URL, {
     method,
     // metto l'oggetto creato nel body del fetch
@@ -46,7 +53,7 @@ const handleSubmit = event => {
         alert(`Product: ${createdProduct.name} successfully edited.`);
         window.location.assign("./backoffice.html");
       } else {
-        alert(`Product: ${createdProduct.name} sucessfully created.`);
+        alert(`Product: ${createdProduct.name} successfully created.`);
       }
       form.reset();
     })
@@ -56,7 +63,7 @@ const handleSubmit = event => {
 };
 
 const deleteProduct = () => {
-  const hasConfirmed = confirm("do you want to delete?");
+  const hasConfirmed = confirm("Do you want to delete?");
   if (hasConfirmed) {
     fetch(URL, {
       method: "DELETE",
@@ -72,7 +79,7 @@ const deleteProduct = () => {
         }
       })
       .then(deletedProduct => {
-        alert("You succesfully deleted the item " + deletedProduct.name);
+        alert("You successfully deleted the item " + deletedProduct.name);
         window.location.assign("/");
       })
       .catch(error => console.log(error));
@@ -137,15 +144,13 @@ window.addEventListener("DOMContentLoaded", () => {
     resetBtn.innerText = "Reset";
     resetBtn.setAttribute("id", "resetBtn");
     resetBtn.setAttribute("type", "button");
-    resetBtn.addEventListener("click", () => {
-      const resetAlertPlaceholder = document.getElementById("resetAlertPlaceholder");
-      resetAlertPlaceholder.classList.remove("d-none");
-      const resetAlertBtn = document.getElementById("resetAlertBtn");
-      resetAlertBtn.onclick = () => {
-        resetAlertPlaceholder.classList.add("d-none");
-        form.reset();
-      };
-    });
+    resetBtn.setAttribute("data-bs-toggle", "modal");
+    resetBtn.setAttribute("data-bs-target", "#resetModal");
+    const resetBtnModal = document.getElementById("resetBtnModal");
+    resetBtnModal.setAttribute("data-bs-dismiss", "modal"); // chiudo il modale al click del bottone reset
+    resetBtnModal.onclick = () => {
+      form.reset();
+    };
     btnContainer.appendChild(resetBtn);
 
     // creo il bottone salva
@@ -154,16 +159,13 @@ window.addEventListener("DOMContentLoaded", () => {
     saveBtn.innerText = "Save";
     saveBtn.setAttribute("id", "saveBtn");
     saveBtn.setAttribute("type", "button");
-    saveBtn.addEventListener("click", () => {
-      const saveAlertPlaceholder = document.getElementById("saveAlertPlaceholder");
-      saveAlertPlaceholder.classList.remove("d-none");
-      const saveAlertBtn = document.getElementById("saveAlertBtn");
-      console.log(saveAlertBtn);
-      saveAlertBtn.onclick = () => {
-        saveAlertPlaceholder.classList.add("d-none");
-        form.requestSubmit();
-      };
-    });
+    saveBtn.setAttribute("data-bs-toggle", "modal");
+    saveBtn.setAttribute("data-bs-target", "#saveModal");
+    const saveBtnModal = document.getElementById("saveBtnModal");
+    saveBtnModal.setAttribute("data-bs-dismiss", "modal"); // chiudo il modale al click del bottone save
+    saveBtnModal.onclick = () => {
+      form.requestSubmit(); // -> avvia il submit del form
+    };
     btnContainer.appendChild(saveBtn);
   }
 
