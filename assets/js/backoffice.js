@@ -137,6 +137,9 @@ window.addEventListener("DOMContentLoaded", () => {
       .then(selectedProduct => {
         console.log(selectedProduct);
 
+        // salvo il prodotto selezionato nell'oggetto
+        selectedProductObj = selectedProduct;
+
         // destrutturo l'oggetto
         const { name, description, brand, imageUrl, price } = selectedProduct;
 
@@ -160,6 +163,10 @@ window.addEventListener("DOMContentLoaded", () => {
       const deleteAlertPlaceholder = document.getElementById("deleteAlertPlaceholder");
       deleteAlertPlaceholder.classList.remove("d-none");
       const deleteAlertBtn = document.getElementById("deleteAlertBtn");
+      const deleteAlertDismissBtn = document.getElementById("deleteAlertDismissBtn");
+      deleteAlertDismissBtn.addEventListener("click", () => {
+        deleteAlertPlaceholder.classList.add("d-none");
+      });
 
       // aggiungo onclick al btn delete per fare il submit
       deleteAlertBtn.onclick = () => {
@@ -169,12 +176,22 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     btnContainer.appendChild(deleteBtn);
 
-    // creo il bottone modify
-    const modifyBtn = document.createElement("button");
-    modifyBtn.className = "btn btn-primary px-3";
-    modifyBtn.innerText = "Edit";
-    modifyBtn.setAttribute("id", "modifyBtn");
-    btnContainer.appendChild(modifyBtn);
+    // creo il bottone edit
+    const editBtn = document.createElement("button");
+    editBtn.className = "btn btn-primary px-3";
+    editBtn.innerText = "Edit";
+    editBtn.setAttribute("id", "editBtn");
+    editBtn.setAttribute("type", "button");
+
+    editBtn.addEventListener("click", () => {
+      // rendo visibile l'alert
+      const editAlertPlaceholder = document.getElementById("editAlertPlaceholder");
+      editAlertPlaceholder.classList.remove("d-none");
+
+      // aggiungo onclick al btn edit per nascondere l'alert e modificare il prodotto
+      const editAlertBtn = document.getElementById("editAlertBtn");
+    });
+    btnContainer.appendChild(editBtn);
 
     /* chiusura IF */
   } else {

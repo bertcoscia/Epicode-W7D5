@@ -94,12 +94,34 @@
                         </div>
                     </div>
 
+                    <!-- Edit Alert -->
+                    <div id="editAlertPlaceholder" class="d-none">
+                        <div class="alert alert-light alert-dismissible d-flex flex-column row-gap-3" role="alert">
+                            <div class="h5">
+                                Do you want to edit the product details?
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button id="editAlertDismissBtn" type="button" class="btn btn-secondary" aria-label="Close">Dismiss</button>
+                                <button id="editAlertBtn" type="button" class="btn btn-primary px-3" aria-label="Close">Edit</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Failed Save Alert -->
                     <div id="failedSaveAlertPlaceholder" class="d-none">
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <div class="h5">A product with the same name already exists. Please choose another name for your product.
                             </div>
                             <button id="failedSaveAlertBtn" type="button" class="btn-close" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <!-- Failed Edit Alert -->
+                    <div id="failedEditAlertPlaceholder" class="d-none">
+                        <div class="alert alert-warning alert-dismissible" role="alert">
+                            <div class="h5">Please edit the product details.
+                            </div>
+                            <button id="failedEditAlertBtn" type="button" class="btn-close" aria-label="Close"></button>
                         </div>
                     </div>
 

@@ -74,14 +74,14 @@ const fetchProducts = () => {
           cardPrice.innerText = `$${product.price}`;
           cardPrice.className = "border border-secondary-subtle rounded-pill text-center bg-warning px-3 py-1";
 
-          // creo il button modifica
-          const modifyBtn = document.createElement("a");
-          modifyBtn.className = "btn btn-primary px-4";
-          modifyBtn.innerText = "Edit";
-          modifyBtn.setAttribute("href", `./backoffice.html?productId=${product._id}`);
+          // creo il button edit
+          const editBtn = document.createElement("a");
+          editBtn.className = "btn btn-primary px-4";
+          editBtn.innerText = "Edit";
+          editBtn.setAttribute("href", `./backoffice.html?productId=${product._id}`);
 
           cardImgAnchor.appendChild(cardImg);
-          cardFooter.append(modifyBtn, cardPrice);
+          cardFooter.append(editBtn, cardPrice);
           cardBody.append(cardTitle, cardSubTitle, cardText, cardFooter);
           card.append(cardImgAnchor, cardBody);
           col.appendChild(card);
@@ -96,7 +96,7 @@ const redirectCardImg = product => {
   window.location.assign(`./details.html/?productId=${product._id}`);
 };
 
-const redirectModifyBtn = product => {
+const redirectEditBtn = product => {
   window.location.assign(`./backoffice.html/?productId=${product._id}`);
 };
 
