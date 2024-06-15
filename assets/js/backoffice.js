@@ -56,6 +56,8 @@ const handleSubmit = event => {
       } else {
         const successCreateAlert = document.getElementById("successCreateAlert");
         successCreateAlert.classList.remove("d-none");
+        const successCreateAlertText = document.getElementById("successCreateAlertText");
+        successCreateAlertText.innerText = `Product ${createdProduct.name} successfully created!`;
         let seconds = 4;
         const successCreateAlertTimer = document.querySelector("#successCreateAlertTimer span");
         setInterval(() => {
