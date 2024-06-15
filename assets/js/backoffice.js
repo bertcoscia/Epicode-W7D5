@@ -38,6 +38,12 @@ const handleSubmit = event => {
       if (response.ok) {
         return response.json();
       } else {
+        const failedSaveAlertPlaceholder = document.getElementById("failedSaveAlertPlaceholder");
+        failedSaveAlertPlaceholder.classList.remove("d-none");
+        const failedSaveAlertBtn = document.getElementById("failedSaveAlertBtn");
+        failedSaveAlertBtn.onclick = () => {
+          failedSaveAlertPlaceholder.classList.add("d-none");
+        };
         throw new Error("Error in the creation of the product");
       }
     })
