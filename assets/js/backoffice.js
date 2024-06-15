@@ -145,6 +145,10 @@ window.addEventListener("DOMContentLoaded", () => {
         resetAlertPlaceholder.classList.add("d-none");
         form.reset();
       };
+      const resetAlertDismissBtn = document.getElementById("resetAlertDismissBtn");
+      resetAlertDismissBtn.onclick = () => {
+        resetAlertPlaceholder.classList.add("d-none");
+      };
     });
     btnContainer.appendChild(resetBtn);
 
@@ -162,6 +166,10 @@ window.addEventListener("DOMContentLoaded", () => {
       saveAlertBtn.onclick = () => {
         saveAlertPlaceholder.classList.add("d-none");
         form.requestSubmit();
+      };
+      const saveAlertDismissBtn = document.getElementById("saveAlertDismissBtn");
+      saveAlertDismissBtn.onclick = () => {
+        resetAlertPlaceholder.classList.add("d-none");
       };
     });
     btnContainer.appendChild(saveBtn);
