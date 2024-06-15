@@ -60,7 +60,7 @@ const handleSubmit = event => {
 
         // genero il messaggio dell'alert
         const successCreateAlertText = document.getElementById("successCreateAlertText");
-        successCreateAlertText.innerText = `Product ${createdProduct.name} successfully created!`;
+        successCreateAlertText.innerText = `Product "${createdProduct.name}" successfully created!`;
 
         // avvio il countdown per resettare il form e refreshare la pagina
         let seconds = 4;
@@ -81,43 +81,40 @@ const handleSubmit = event => {
 };
 
 const deleteProduct = () => {
-  const hasConfirmed = confirm("do you want to delete?");
-  if (hasConfirmed) {
-    fetch(URL, {
-      method: "DELETE",
-      headers: {
-        Authorization: auth
+  fetch(URL, {
+    method: "DELETE",
+    headers: {
+      Authorization: auth
+    }
+  })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Couldn't delete the item");
       }
     })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Couldn't delete the item");
+    .then(deletedProduct => {
+      // rendo visibile l'alert
+      const successDeleteAlert = document.getElementById("successDeleteAlert");
+      successDeleteAlert.classList.remove("d-none");
+
+      // genero il messaggio dell'alert
+      const successDeleteAlertText = document.getElementById("successDeleteAlertText");
+      successDeleteAlertText.innerText = `Product "${deletedProduct.name}" successfully deleted.`;
+
+      // avvio il countdown per reindirizzare l'utente alla homepage
+      let seconds = 4;
+      const successDeleteAlertTimer = document.querySelector("#successDeleteAlertTimer span");
+      setInterval(() => {
+        successDeleteAlertTimer.innerText = seconds;
+        seconds--;
+        if (seconds < 0) {
+          window.location.assign("./");
         }
-      })
-      .then(deletedProduct => {
-        // rendo visibile l'alert
-        const successDeleteAlert = document.getElementById("successDeleteAlert");
-        successDeleteAlert.classList.remove("d-none");
-
-        // genero il messaggio dell'alert
-        const successDeleteAlertText = document.getElementById("successDeleteAlertText");
-        successDeleteAlertText.innerText = `Product ${deletedProduct.name} successfully deleted.`;
-
-        // avvio il countdown per reindirizzare l'utente alla homepage
-        let seconds = 4;
-        const successDeleteAlertTimer = document.querySelector("#successDeleteAlertTimer span");
-        setInterval(() => {
-          successDeleteAlertTimer.innerText = seconds;
-          seconds--;
-          if (seconds < 0) {
-            window.location.assign("./");
-          }
-        }, 1000);
-      })
-      .catch(error => console.log(error));
-  }
+      }, 1000);
+    })
+    .catch(error => console.log(error));
 };
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -156,9 +153,20 @@ window.addEventListener("DOMContentLoaded", () => {
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "btn btn-danger px-3";
     deleteBtn.innerText = "Delete";
-    deleteBtn.onclick = deleteProduct;
     deleteBtn.setAttribute("id", "deleteBtn");
     deleteBtn.setAttribute("type", "button");
+    deleteBtn.addEventListener("click", () => {
+      // rendo visibile l'alert
+      const deleteAlertPlaceholder = document.getElementById("deleteAlertPlaceholder");
+      deleteAlertPlaceholder.classList.remove("d-none");
+      const deleteAlertBtn = document.getElementById("deleteAlertBtn");
+
+      // aggiungo onclick al btn delete per fare il submit
+      deleteAlertBtn.onclick = () => {
+        deleteAlertPlaceholder.classList.add("d-none");
+        deleteProduct();
+      };
+    });
     btnContainer.appendChild(deleteBtn);
 
     // creo il bottone modify
