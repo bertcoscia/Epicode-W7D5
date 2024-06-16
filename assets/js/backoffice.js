@@ -11,6 +11,8 @@ const auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjk5Nz
 
 let selectedProduct = null;
 
+const alertsContainer = document.getElementById("alertsContainer");
+
 const handleSubmit = event => {
   event.preventDefault();
 
@@ -77,9 +79,13 @@ const handleSubmit = event => {
           // genero il messaggi dell'alert
           const successEditAlertText = document.getElementById("successEditAlertText");
           successEditAlertText.innerText = `Product "${createdProduct.name}" successfully edited!`;
-          // avvio il countdown per resettare il form e refreshare la pagina
-          let seconds = 4;
+
+          // avvio il countdown per resettare il form e reindirizzare l'utente
           const successEditAlertTimer = document.querySelector("#successEditAlertTimer span");
+          editAlertPlaceholder.classList.add("d-none");
+          const btnContainer = document.getElementById("btnContainer");
+          btnContainer.classList.add("d-none");
+          let seconds = 4;
           setInterval(() => {
             successEditAlertTimer.innerText = seconds;
             seconds--;
@@ -99,6 +105,10 @@ const handleSubmit = event => {
         successCreateAlertText.innerText = `Product "${createdProduct.name}" successfully created!`;
 
         // avvio il countdown per resettare il form e refreshare la pagina
+        const btnContainer = document.getElementById("btnContainer");
+        const saveAlertPlaceholder = document.getElementById("saveAlertPlaceholder");
+        saveAlertPlaceholder.classList.add("d-none");
+        btnContainer.classList.add("d-none");
         let seconds = 4;
         const successCreateAlertTimer = document.querySelector("#successCreateAlertTimer span");
         setInterval(() => {
@@ -138,6 +148,11 @@ const deleteProduct = () => {
       // genero il messaggio dell'alert
       const successDeleteAlertText = document.getElementById("successDeleteAlertText");
       successDeleteAlertText.innerText = `Product "${deletedProduct.name}" successfully deleted.`;
+
+      const btnContainer = document.getElementById("btnContainer");
+      const deleteAlertPlaceholder = document.getElementById("deleteAlertPlaceholder");
+      btnContainer.classList.add("d-none");
+      deleteAlertPlaceholder.classList.add("d-none");
 
       // avvio il countdown per reindirizzare l'utente alla homepage
       let seconds = 4;
