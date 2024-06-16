@@ -9,6 +9,8 @@ const method = id ? "PUT" : "POST";
 
 const auth = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjZiZjk5NzdjMjM5YzAwMTUyZjRiM2MiLCJpYXQiOjE3MTgzNTIyNzksImV4cCI6MTcxOTU2MTg3OX0.iqJ9iKifEmv4QneeBjeH2alL6rTwRy3dLqfFcopl1co ";
 
+let selectedProduct = null;
+
 const handleSubmit = event => {
   event.preventDefault();
 
@@ -23,7 +25,7 @@ const handleSubmit = event => {
     imageUrl: document.getElementById("productImg").value,
     price: document.getElementById("price").value
   };
-  console.log(newProduct);
+  console.log("new product", newProduct);
 
   fetch(URL, {
     method,
@@ -51,8 +53,42 @@ const handleSubmit = event => {
     })
     .then(createdProduct => {
       if (id) {
-        alert(`Product: ${createdProduct.name} successfully edited.`);
-        window.location.assign("./backoffice.html");
+        // se tutti i campi del form sono rimasti invariati mostro alert
+        if (
+          createdProduct.name === selectedProduct.name &&
+          createdProduct.description === selectedProduct.description &&
+          createdProduct.brand === selectedProduct.brand &&
+          createdProduct.imageUrl === selectedProduct.imageUrl &&
+          createdProduct.price === selectedProduct.price
+        ) {
+          const failedEditAlertPlaceholder = document.getElementById("failedEditAlertPlaceholder");
+          failedEditAlertPlaceholder.classList.remove("d-none");
+
+          // aggiungo onclick per nascondere l'alert
+          const failedEditAlertBtn = document.getElementById("failedEditAlertBtn");
+          failedEditAlertBtn.onclick = () => {
+            failedEditAlertPlaceholder.classList.add("d-none");
+          };
+        } else {
+          // rendo visibile l'alert
+          const successEditAlert = document.getElementById("successEditAlert");
+          successEditAlert.classList.remove("d-none");
+
+          // genero il messaggi dell'alert
+          const successEditAlertText = document.getElementById("successEditAlertText");
+          successEditAlertText.innerText = `Product "${createdProduct.name}" successfully edited!`;
+          // avvio il countdown per resettare il form e refreshare la pagina
+          let seconds = 4;
+          const successEditAlertTimer = document.querySelector("#successEditAlertTimer span");
+          setInterval(() => {
+            successEditAlertTimer.innerText = seconds;
+            seconds--;
+            if (seconds < 0) {
+              form.reset();
+              window.location.assign(`./details.html?productId=${createdProduct._id}`);
+            }
+          }, 1000);
+        }
       } else {
         // rendo visibile l'alert
         const successCreateAlert = document.getElementById("successCreateAlert");
@@ -70,7 +106,7 @@ const handleSubmit = event => {
           seconds--;
           if (seconds < 0) {
             form.reset();
-            location.reload();
+            window.location.assign(`./details.html?productId=${createdProduct._id}`);
           }
         }, 1000);
       }
@@ -134,11 +170,9 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     })
       .then(response => response.json())
-      .then(selectedProduct => {
-        console.log(selectedProduct);
-
-        // salvo il prodotto selezionato nell'oggetto
-        selectedProductObj = selectedProduct;
+      .then(product => {
+        selectedProduct = product;
+        console.log("selected product", selectedProduct);
 
         // destrutturo l'oggetto
         const { name, description, brand, imageUrl, price } = selectedProduct;
@@ -190,6 +224,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
       // aggiungo onclick al btn edit per nascondere l'alert e modificare il prodotto
       const editAlertBtn = document.getElementById("editAlertBtn");
+      editAlertBtn.onclick = () => {
+        form.requestSubmit();
+      };
     });
     btnContainer.appendChild(editBtn);
 
